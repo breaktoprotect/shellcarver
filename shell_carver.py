@@ -35,19 +35,10 @@ def toHex(val, nbits):
 def toBits(val, nbits):
     return (val + (1 << nbits)) % (1 << nbits)
 
-# Take in argument
+# Takes in 1 argument
 # Expecting: e.g. \xde\xad\xbe\xef
-# But when fed into argument, '\' will be omitted
-rawInput = sys.argv[1]
-
-# debug
-print "rawInput: " + rawInput
-
-rawInput = rawInput.replace('\\', '')
+rawInput = sys.argv[1].replace('\\', '')
 stringInput = rawInput.replace("x", '')
-
-# debug
-#print "replaced string: " + stringInput
 
 neededByteArray = bytearray.fromhex(stringInput)
 
@@ -88,11 +79,6 @@ def getReversedHexString(hexValue, withComments):
     # Reverse the bytearray
     reverseBA = theBA[::-1]
 
-    # debug
-    # for i in reverseBA:
-    #	print hex(i)
-
-
     reverseString = ''.join('\\x' + '{:02x}'.format(x) for x in reverseBA)
 
     if withComments == True:
@@ -102,7 +88,7 @@ def getReversedHexString(hexValue, withComments):
 
 # Progressive search algo
 # Search starts on the first order
-def searchOne():
+def startSearch():
     for hex1 in allowed:
         for hex2 in allowed:
             for hex3 in allowed:
@@ -160,7 +146,7 @@ def searchFour(lsb1, lsb2, lsb3):
                 result = 0xFFFFFFFF + 1 - order4byte1 - order4byte2 - order4byte3
 
                 if toBits(result, 32) == code4:
-                    print "Found full match: " + stringInput
+                    print "Found full match for shellcode: " + stringInput
                     #print hex(order4byte1)
                     #print hex(order4byte2)
                     #print hex(order4byte3)
@@ -176,5 +162,5 @@ def searchFour(lsb1, lsb2, lsb3):
 
                     sys.exit(1)
 
-
-searchOne()
+if __name__ == "__main__":
+	startSearch()

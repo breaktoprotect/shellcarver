@@ -1,7 +1,8 @@
 # shellcarver
+## version 0.1.0
 Carve shellcode within the memory using restrictive character set
 
-Usage: 
+Usage: python shell_carver.py [4-byte shell code to carve into memory]
 
 Example:
 js@test:~#./shell_carver.py \xaf\x75\xea\xaf
