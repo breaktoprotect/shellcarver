@@ -1,5 +1,4 @@
-# shellcarver
-## version 0.1.0
+# shellcarver v0.1.0
 Carve shellcode within the memory using restrictive character set
 
 Usage: python shell_carver.py [4-byte shell code to carve into memory]
